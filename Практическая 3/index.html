@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPERT - Главная</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html">Главная</a>
+            <a href="unique.html">Уникальное предложение</a>
+            <a href="catalog.html">Каталог</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-btn">Сервис</a>
+                <div class="dropdown-content">
+                    <a href="#">Установка и монтаж</a>
+                    <a href="#">Доставка</a>
+                    <a href="#">Гарантийное обслуживание</a>
+                    <a href="#">Консультация специалиста</a>
+                    <a href="#">Заказ запчастей</a>
+                </div>
+            </div>
+            <a href="#">Акции</a>
+            <a href="#">О производителе</a>
+            <a href="#">Контакты</a>
+        </nav>
+
+        <div class="help-btn" id="helpBtn">
+            <span>Помочь выбрать</span>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <img class="main-logo" src="images/logo.jpg" alt="">
+            <h1>EXPERT</h1>
+            <button class="consult-btn">
+                Получить консультацию
+                <span>→</span>
+            </button>
+        </div>
+
+        <div class="bottom-features">
+            <div class="feature">
+                <div class="line"></div>
+                <div class="dot"></div>
+                <img src="images/icon-design.png" alt="">
+                <p>Дизайн для любых идей</p>
+            </div>
+            <div class="feature">
+                <div class="line"></div>
+                <div class="dot"></div>
+                <img src="images/icon-materials.png" alt="">
+                <p class="europe-text">Европейские материалы</p>
+            </div>
+            <div class="feature">
+                <div class="line"></div>
+                <div class="dot"></div>
+                <img src="images/icon-furniture.png" alt="">
+                <p>Итальянская фурнитура</p>
+            </div>
+            <div class="feature">
+                <div class="line"></div>
+                <div class="dot"></div>
+                <img src="images/icon-guarantee.png" alt="">
+                <p class="guarantee-text">Пожизненная гарантия</p>
+            </div>
+        </div>
+    </main>
+
+    <div class="help-modal" id="helpModal">
+        <div class="help-modal-content">
+            <div class="help-step" id="step1">
+                <div class="step-title">Помочь выбрать</div>
+                <div class="step-buttons">
+                    <button class="step-btn" data-step="1">Помочь выбрать</button>
+                </div>
+            </div>
+
+            <div class="help-step" id="step2" style="display: none;">
+                <div class="step-title">Ваш бюджет:</div>
+                <div class="budget-buttons">
+                    <button class="budget-btn" data-budget="30000">30 000 ₽ — 20 000 ₽</button>
+                    <button class="budget-btn" data-budget="50000">50 000 ₽ — 70 000 ₽</button>
+                    <button class="budget-btn" data-budget="100000">100 000 ₽ — 90 000 ₽</button>
+                    <button class="budget-btn" data-budget="190000">190 000 ₽ — Новый</button>
+                </div>
+            </div>
+
+            <div class="help-step" id="step3" style="display: none;">
+                <div class="step-title">Помочь выбрать</div>
+                <div class="step-text">Наш менеджер перезвонит вам в течение короткого времени, подберет лучший вариант и ответит на любые вопросы</div>
+                <div class="voice-buttons">
+                    <button class="voice-btn" data-voice="голос">Голосов</button>
+                    <button class="send-btn" id="sendBtn">Отправить</button>
+                </div>
+            </div>
+
+            <div class="help-step" id="step4" style="display: none;">
+                <div class="step-title">Спасибо за обращение!</div>
+                <div class="thanks-text">(Внимание! Вы можете отправить несколько вопросов)</div>
+                <button class="skip-btn" id="skipBtn">Пропустить процедуру</button>
+                <div class="door-choice">
+                    <span>Важно необходимо дверь:</span>
+                    <button class="choice-btn" id="chooseBtn">Выбрать</button>
+                    <button class="choice-btn" id="giveBtn">Дать</button>
+                </div>
+            </div>
+
+            <button class="modal-close" id="closeModal">×</button>
+        </div>
+    </div>
+
+    <script>
+        const helpBtn = document.getElementById('helpBtn');
+        const modal = document.getElementById('helpModal');
+        const closeBtn = document.getElementById('closeModal');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const step4 = document.getElementById('step4');
+        
+        let selectedBudget = null;
+        let selectedVoice = null;
+
+        helpBtn.onclick = () => {
+            modal.style.display = 'flex';
+            step1.style.display = 'block';
+            step2.style.display = 'none';
+            step3.style.display = 'none';
+            step4.style.display = 'none';
+        };
+
+        closeBtn.onclick = () => {
+            modal.style.display = 'none';
+        };
+
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.querySelectorAll('[data-step="1"]').forEach(btn => {
+            btn.onclick = () => {
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+            };
+        });
+
+        document.querySelectorAll('.budget-btn').forEach(btn => {
+            btn.onclick = () => {
+                selectedBudget = btn.getAttribute('data-budget');
+                step2.style.display = 'none';
+                step3.style.display = 'block';
+            };
+        });
+
+        document.querySelectorAll('.voice-btn').forEach(btn => {
+            btn.onclick = () => {
+                selectedVoice = btn.innerText;
+            };
+        });
+
+        document.getElementById('sendBtn').onclick = () => {
+            step3.style.display = 'none';
+            step4.style.display = 'block';
+        };
+
+        document.getElementById('skipBtn').onclick = () => {
+            modal.style.display = 'none';
+        };
+
+        document.getElementById('chooseBtn').onclick = () => {
+            alert('Вы выбрали дверь');
+            modal.style.display = 'none';
+        };
+
+        document.getElementById('giveBtn').onclick = () => {
+            alert('Вы дали ответ');
+            modal.style.display = 'none';
+        };
+    </script>
+</body>
+</html>
